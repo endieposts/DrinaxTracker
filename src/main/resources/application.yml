@@ -1,0 +1,60 @@
+server:
+  port: 8091
+
+spring:
+  application:
+    name: DrinaxTracker
+  main:
+    banner-mode: off
+  cloud:
+    vault:
+      token: 00000000-0000-0000-00000000000
+      scheme: http
+      application-name: drinaxtracker
+      host: 127.0.0.1
+      port: 8200
+  profiles:
+    active: dev
+
+---
+
+dev:
+  spring:
+    datasource:
+      url: jdbc:mysql://thor:3306/drinax_tracker
+      username: ${dbusername}
+      password: ${dbpassword}
+    jpa:
+      show-sql: true
+      generate-ddl: true
+      hibernate:
+        ddl-auto: create
+      defer-datasource-initialization: true
+    sql:
+      init:
+        mode: always
+        data-locations: classpath:data-mysql.sql
+    config:
+      activate:
+        on-profile: dev
+
+---
+spring:
+  datasource:
+    url: jdbc:h2:mem:drinaxtracker
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data-mysql.sql
+  config:
+    activate:
+      on-profile: test
