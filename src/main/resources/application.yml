@@ -16,10 +16,15 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:mysql://thor:3306/drinax_tracker
-    username: ${dbusername}
-    password: ${dbpassword}
+    #url: jdbc:mysql://thor:3306/drinax_tracker
+    #username: ${dbusername}
+    #password: ${dbpassword}
+    url: jdbc:h2:file:/data/drinax_tracker
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
   jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
     generate-ddl: true
     hibernate:
