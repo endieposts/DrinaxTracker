@@ -43,5 +43,13 @@ public class UserRepositoryTest {
         assertThat(AppUsers).contains(user1, user2, user3);
     }
 
+    @Test
+    public void should_find_user_by_id() {
+        User user = userRepository.save(new User(5, "username5", "dummypassword", "username5@test.com", "1"));
+        User user2 = userRepository.save(new User(6, "username6", "dummypassword", "username6@test.com", "1"));
 
+        User foundUser = userRepository.findById(user2.getId()).get();
+
+        assertThat(foundUser).isEqualTo(user2);
+    }
 }

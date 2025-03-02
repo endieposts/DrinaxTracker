@@ -28,10 +28,15 @@ spring:
     show-sql: true
     generate-ddl: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     defer-datasource-initialization: true
   sql:
     init:
       mode: always
       data-locations: classpath:data-mysql.sql
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
