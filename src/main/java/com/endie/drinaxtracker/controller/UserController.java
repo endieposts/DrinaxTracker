@@ -5,6 +5,7 @@ import com.endie.drinaxtracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.endie.drinaxtracker.exception.ResourceNotFoundException;
 import javax.validation.Valid;
 
 import java.util.List;
