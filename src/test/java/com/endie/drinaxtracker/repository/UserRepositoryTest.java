@@ -26,17 +26,17 @@ public class UserRepositoryTest {
 
     @Test
     public void should_store_a_user() {
-        User user = userRepository.save(new User(1, "username1", "dummypassword", "username1@test.com", "1"));
+        User user = userRepository.save(new User( "username1", "dummypassword", "username1@test.com", "1"));
 
-        assertThat(user).hasFieldOrPropertyWithValue("id", 1);
+        //assertThat(user).hasFieldOrPropertyWithValue("id", 1);
         assertThat(user).hasFieldOrPropertyWithValue("password", "dummypassword");
     }
 
     @Test
     public void should_find_all_users() {
-        User user1 = userRepository.save(new User(2, "username2", "dummypassword", "username2@test.com", "1"));
-        User user2 = userRepository.save(new User(3, "username3", "dummypassword", "username3@test.com", "2"));
-        User user3 = userRepository.save(new User(4, "username4", "dummypassword", "username4@test.com", "3"));
+        User user1 = userRepository.save(new User("username2", "dummypassword", "username2@test.com", "1"));
+        User user2 = userRepository.save(new User("username3", "dummypassword", "username3@test.com", "2"));
+        User user3 = userRepository.save(new User("username4", "dummypassword", "username4@test.com", "3"));
 
         Iterable<User> AppUsers = userRepository.findAll();
 
@@ -45,11 +45,30 @@ public class UserRepositoryTest {
 
     @Test
     public void should_find_user_by_id() {
-        User user = userRepository.save(new User(5, "username5", "dummypassword", "username5@test.com", "1"));
-        User user2 = userRepository.save(new User(6, "username6", "dummypassword", "username6@test.com", "1"));
+        User user = userRepository.save(new User("username5", "dummypassword", "username5@test.com", "1"));
+        User user2 = userRepository.save(new User("username6", "dummypassword", "username6@test.com", "1"));
 
         User foundUser = userRepository.findById(user2.getId()).get();
 
         assertThat(foundUser).isEqualTo(user2);
+    }
+
+    @Test
+    public void should_update_user_by_id() {
+        User user = userRepository.save(new User("username7", "dummypassword", "username7@test.com", "1"));
+        User user2 = userRepository.save(new User("username8", "dummypassword", "username8@test.com", "1"));
+
+        User updatedUser = userRepository.save(new User("updatedusername8", "dummypassword", "username8@test.com", "2"));
+
+        User foundUser = userRepository.findById(user2.getId()).get();
+        foundUser.setUsername(updatedUser.getUsername());
+        foundUser.setRole(updatedUser.getRole());
+        userRepository.save(foundUser);
+
+        User checkUser = userRepository.findById(user2.getId()).get();
+
+        assertThat(checkUser.getId()).isEqualTo(user2.getId());
+        assertThat(checkUser.getUsername()).isEqualTo(updatedUser.getUsername());
+        assertThat(checkUser.getRole()).isEqualTo(updatedUser.getRole());
     }
 }
