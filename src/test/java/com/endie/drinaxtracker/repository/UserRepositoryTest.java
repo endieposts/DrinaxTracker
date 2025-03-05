@@ -71,4 +71,16 @@ public class UserRepositoryTest {
         assertThat(checkUser.getUsername()).isEqualTo(updatedUser.getUsername());
         assertThat(checkUser.getRole()).isEqualTo(updatedUser.getRole());
     }
+
+    @Test
+    public void should_delete_user_by_id() {
+        userRepository.deleteAll();
+
+        User user = userRepository.save(new User("username9", "dummypassword", "username9@test.com", "1"));
+        User user2 = userRepository.save(new User("username10", "dummypassword", "username10@test.com", "1"));
+
+        userRepository.deleteById(user2.getId());
+
+        assertThat(userRepository.findAll()).hasSize(1).contains(user);
+    }
 }
