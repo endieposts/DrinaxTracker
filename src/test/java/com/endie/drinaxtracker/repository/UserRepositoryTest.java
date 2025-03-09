@@ -83,4 +83,16 @@ public class UserRepositoryTest {
 
         assertThat(userRepository.findAll()).hasSize(1).contains(user);
     }
+
+    @Test
+    public void should_delete_all_users() {
+        userRepository.deleteAll();
+
+        User user = userRepository.save(new User("username11", "dummypassword", "username11@test.com", "1"));
+        User user2 = userRepository.save(new User("username12", "dummypassword", "username12@test.com", "1"));
+
+        userRepository.deleteAll();
+
+        assertThat(userRepository.findAll()).isEmpty();
+    }
 }
