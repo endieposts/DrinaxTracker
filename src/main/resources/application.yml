@@ -43,7 +43,9 @@ management:
 
 springdoc:
   api-docs:
-    enabled: true
-    path: /api-docs
+    path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
+    enable: true
+  show-actuator: true
+  packages-to-scan: com.endie.drinax-tracker.controller
