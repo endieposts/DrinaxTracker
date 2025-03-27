@@ -1,6 +1,7 @@
 package com.endie.drinaxtracker.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "users")
@@ -10,9 +11,17 @@ public class User {
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(nullable=false, updatable=false)
     private Long id;
+
+    @NotBlank(message = "Username is mandatory")
     private String username;
+
+    @NotBlank(message = "Password is mandatory")
     private String password;
+
+    @NotBlank(message = "Email is mandatory")
     private String email;
+
+    @NotBlank(message = "Role is mandatory")
     private String role;
 
 //
