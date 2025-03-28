@@ -24,7 +24,6 @@ public class User {
     @NotBlank(message = "Role is mandatory")
     private String role;
 
-//
     // Getters and Setters
     public long getId() {
         return id;
