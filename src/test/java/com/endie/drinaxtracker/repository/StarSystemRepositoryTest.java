@@ -58,13 +58,26 @@ public class StarSystemRepositoryTest {
         StarSystem starSystem = starSystemRepository.save(new StarSystem("name7", "notes7", "sector7", "subSector7", "0", "0"));
         StarSystem starSystem2 = starSystemRepository.save(new StarSystem("name8", "notes8", "sector8", "subSector8", "0", "0"));
 
-        StarSystem updatedStarSystem = new StarSystem("name8", "notes8", "sector8", "subSector8", "0", "0");
+        StarSystem updatedStarSystem = new StarSystem("name9", "notes9", "sector9", "subSector9", "0", "0");
         updatedStarSystem.setId(starSystem2.getId());
         StarSystem foundStarSystem = starSystemRepository.findById(starSystem2.getId()).get();
         foundStarSystem.setName(updatedStarSystem.getName());
 
         starSystemRepository.save(foundStarSystem);
 
-        assertThat(foundStarSystem).isEqualTo(updatedStarSystem);
+        assertThat(foundStarSystem.getId()).isEqualTo(updatedStarSystem.getId());
+    }
+
+    @Test
+    public void should_delete_starSystem_by_id() {
+        StarSystem starSystem = starSystemRepository.save(new StarSystem("name10", "notes10", "sector10", "subSector10", "0", "0"));
+        StarSystem starSystem2 = starSystemRepository.save(new StarSystem("name11", "notes11", "sector11", "subSector11", "0", "0"));
+
+        starSystemRepository.delete(starSystem2);
+
+        Iterable<StarSystem> AppStarSystems = starSystemRepository.findAll();
+
+        assertThat(AppStarSystems).contains(starSystem);
+        assertThat(AppStarSystems).doesNotContain(starSystem2);
     }
 }

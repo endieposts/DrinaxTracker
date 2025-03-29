@@ -31,19 +31,6 @@ public class StarSystem {
     @ColumnDefault("0")
     private String partyAttitude;
 
-    public StarSystem() {
-    }
-
-    public StarSystem(StarSystem starSystem) {
-        this.id = starSystem.id;
-        this.name = starSystem.name;
-        this.notes = starSystem.notes;
-        this.sector = starSystem.sector;
-        this.subSector = starSystem.subSector;
-        this.drinaxAttitude = starSystem.drinaxAttitude;
-        this.partyAttitude = starSystem.partyAttitude;
-    }
-
     public StarSystem(String name, String notes, String sector, String subSector, String drinaxAttitude, String partyAttitude) {
         this.name = name;
         this.notes = notes;
