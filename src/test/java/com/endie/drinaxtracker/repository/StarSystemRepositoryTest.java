@@ -80,4 +80,16 @@ public class StarSystemRepositoryTest {
         assertThat(AppStarSystems).contains(starSystem);
         assertThat(AppStarSystems).doesNotContain(starSystem2);
     }
+
+    @Test
+    public void should_delete_all_users() {
+        StarSystem starSystem = starSystemRepository.save(new StarSystem("name12", "notes12", "sector12", "subSector12", "0", "0"));
+        StarSystem starSystem2 = starSystemRepository.save(new StarSystem("name13", "notes13", "sector13", "subSector13", "0", "0"));
+        
+        starSystemRepository.deleteAll();
+
+        Iterable<StarSystem> starSystems = starSystemRepository.findAll();
+
+        assertThat(starSystems).isEmpty();
+    }
 }
