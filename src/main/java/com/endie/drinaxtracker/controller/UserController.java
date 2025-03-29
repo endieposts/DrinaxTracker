@@ -66,7 +66,7 @@ public class UserController {
         return "redirect:/index";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/edituser/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
@@ -75,7 +75,7 @@ public class UserController {
         return "update-user";
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/updateuser/{id}")
     public String updateUser(@PathVariable("id") long id, @Valid User user,
                              BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -87,7 +87,7 @@ public class UserController {
         return "redirect:/showusers";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/deleteuser/{id}")
     public String deleteUser(@PathVariable("id") long id, Model model) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
